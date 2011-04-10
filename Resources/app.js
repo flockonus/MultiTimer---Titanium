@@ -1,5 +1,6 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
-Titanium.UI.setBackgroundColor('#000');
+//Titanium.UI.setBackgroundColor('#000');
+Titanium.UI.setBackgroundColor('#fff');
 
 // create tab group
 var tabGroup = Titanium.UI.createTabGroup({id:'mainGroup1'});
@@ -9,7 +10,7 @@ var tabGroup = Titanium.UI.createTabGroup({id:'mainGroup1'});
 // create base UI tab and root window
 //
 var win1 = Titanium.UI.createWindow({  
-    title:'MultiTimer : MAIN',
+    title:'MultiTimer : MAIN', // Não parece ser visível
     backgroundColor:'#39f'
 });
 
@@ -19,6 +20,10 @@ var tab1 = Titanium.UI.createTab({
     window:win1
 });
 
+// Assemble first window
+Ti.include('/screens/timers_list.js');
+
+/*
 var label1 = Titanium.UI.createLabel({
 	color:'#888',
 	text:'I should has stuff here, profress barz',
@@ -28,6 +33,7 @@ var label1 = Titanium.UI.createLabel({
 });
 
 win1.add(label1);
+*/
 
 //
 // create controls tab and root window
