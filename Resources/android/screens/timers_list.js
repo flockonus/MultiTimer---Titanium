@@ -46,18 +46,18 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 	var top_gap = 5
 	
 	var taskView = Ti.UI.createView({backgroundColor:'#336699', height:50, left:0, right:0, top: top_gap});
-	var taskLabel = Ti.UI.createLabel({color:'#777', top:3, textAlign:'center', height:'auto', text:task.title});
+	var taskLabel = Ti.UI.createLabel({color:'#777', top:3, textAlign:'left', height:30, text:task.title});
 //
-Ti.API.info('Proxima informação é taskLabel.height, depois, a soma');
-Ti.API.info(taskLabel.height);
-Ti.API.info(3+taskLabel.height+top_gap)
+Ti.API.info('Next info is: taskLabel.height');
+Ti.API.info( parseFloat(taskLabel.height)+"" );
+//Ti.API.info(3+taskLabel.height+top_gap)
 //
 	var lazyBar = Ti.UI.createView({
 		backgroundColor:'orange', 
 		height: 20,
-		left: 10, 
+		left: 10,
 		width: '50%',
-		top: 3+taskLabel.height+top_gap
+		top: 40 //3+taskLabel.height+top_gap
 	});
 	
 	
@@ -70,6 +70,8 @@ Ti.API.info(3+taskLabel.height+top_gap)
 //var bodyView3 = Ti.UI.createView({backgroundColor:'orange', height:50, left:10, right:10, top:10});
 
 win1.add(body);
+
+
 
 
 // FOOTER
