@@ -1,5 +1,8 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 //Titanium.UI.setBackgroundColor('#000');
+
+Ti.API.info("Iniciando Aplicação agora.." + (new Date()) )
+
 Titanium.UI.setBackgroundColor('#fff');
 
 // create tab group
@@ -11,7 +14,7 @@ var tabGroup = Titanium.UI.createTabGroup({id:'mainGroup1'});
 //
 var win1 = Titanium.UI.createWindow({  
     title:'MultiTimer : MAIN', // Não parece ser visível
-    backgroundColor:'#39f'
+    backgroundColor:'#fff'
 });
 
 var tab1 = Titanium.UI.createTab({
