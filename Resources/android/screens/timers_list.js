@@ -1,3 +1,6 @@
+var win1 = Ti.UI.currentWindow;
+
+
 /**
  * 
  * GENERIC ALERT from alert.js
@@ -17,7 +20,7 @@ win1.add(button1); /-> Avaliable in this context
 
 // Temos que fazer uma classe Task com uma interface pré-estabelecida pra usarmos
 // Premio pior nome do mundo de função
-function time_diff_in_percent_from_now(d1, d2){
+function time_diff_in_percent_from_now(d1, d2) {
 	Ti.API.info( "time diff debug" );
 	Ti.API.info( "d1 "+d1);
 	Ti.API.info( "d2 "+d2 );
@@ -41,6 +44,8 @@ function time_diff_in_percent_from_now(d1, d2){
 	return percent_elapsed
 }
 
+
+// func responsável por criar a 'linha' da TASK
 function taskViewBuilder( task ){
 	// space void between Blocks.
 	//var top_gap = 5
@@ -103,7 +108,7 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 	var task = {
 		// FUCKING JS, months begin at 0 .. 11 AFF!
 		begin: new Date(2011, 3, 8, 15, 10, 10),
-		end: new Date(2011, 3, 14, 15, 10, 10),
+		end: new Date(2011, 4, 14, 15, 10, 10),
 		title: "Ola Mundo Ola Mundo Ola Mundo Ola Mundo ", // Limitar a 40 char
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'current' }
