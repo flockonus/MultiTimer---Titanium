@@ -5,14 +5,14 @@
         <target device="ipad">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <id>com.flockonuskaos12.multitimer</id>
-    <name>MultiTimer</name>
-    <version>1.0</version>
-    <publisher>nos2011</publisher>
-    <url>http://flockonus.github.com</url>
-    <description>not specified</description>
-    <copyright>2011 by nos</copyright>
-    <icon>appicon.png</icon>
+<id>com.flockonuskaos12.multitimer</id>
+<name>MultiTimer</name>
+<version>1.0</version>
+<publisher>nos2011</publisher>
+<url>http://flockonus.github.com</url>
+<description>not specified</description>
+<copyright>2011 by nos</copyright>
+<icon>default_app_logo.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
