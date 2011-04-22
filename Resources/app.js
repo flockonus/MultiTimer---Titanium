@@ -13,18 +13,19 @@ var tabGroup = Titanium.UI.createTabGroup({id:'mainGroup1'});
 // create base UI tab and root window
 //
 var win1 = Titanium.UI.createWindow({  
-    title:'MultiTimer : MAIN', // Não parece ser visível
-    backgroundColor:'#fff'
+    title: 'MultiTimer : MAIN', // Parece ser invisível
+    backgroundColor: '#fff',
+    url: '/screens/timers_list.js'
 });
 
 var tab1 = Titanium.UI.createTab({
-    icon:'KS_nav_views.png',
-    title:'Timers',
-    window:win1
+    icon: 'KS_nav_views.png',
+    title: 'Timers',
+    window: win1
 });
 
-// Assemble first window
-Ti.include('/screens/timers_list.js');
+// bad pratice. // Assemble first window
+//Ti.include('/screens/timers_list.js');
 
 /*
 var label1 = Titanium.UI.createLabel({

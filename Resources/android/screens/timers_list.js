@@ -1,4 +1,16 @@
-var win1 = Ti.UI.currentWindow;
+var win = Ti.UI.currentWindow;
+
+
+/** TODO
+ * 
+ * usar o vertical_layout_table no sentido da TABLE
+ * 
+ * Modificar esse arquivo referindo a janela classe usando current window + url
+ *   http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.Window-object
+ * 
+ */ 
+
+
 
 
 /**
@@ -91,14 +103,15 @@ function taskViewBuilder( task ){
 /**
  * from vertical_layout_basic.js
  */
-win1.layout = 'vertical';
+// Do i need this? win1.layout = 'vertical';
 
 // HEADER
 var header = Ti.UI.createView({height:30,borderWidth:1,borderColor:'#999',backgroundColor:'white'});
 var headerLabel = Ti.UI.createLabel({color:'#777', top:10,textAlign:'center', height:'auto', text:'All Current Tasks'});
 header.add(headerLabel);
 
-win1.add(header);
+//win1.add(header);
+win.add(header);
 
 // BODY
 var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'#fff'});
@@ -153,8 +166,8 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 //var bodyView2 = Ti.UI.createView({backgroundColor:'#ff0000', height:50, left:10, right:10, top:10});
 //var bodyView3 = Ti.UI.createView({backgroundColor:'orange', height:50, left:10, right:10, top:10});
 
-win1.add(body);
-
+//win1.add(body);
+win.add(body);
 
 
 
