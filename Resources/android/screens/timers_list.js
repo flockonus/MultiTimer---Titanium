@@ -11,35 +11,17 @@ var win = Ti.UI.currentWindow;
  */ 
 
 
-
-
-/**
- * 
- * GENERIC ALERT from alert.js
-var a = Titanium.UI.createAlertDialog({
-	title:'Alert Test',	message:'Hello World'
-});
-var button1 = Titanium.UI.createButton({
-	title:'Basic Alert',	height:40,	width:200,	top:10
-});
-button1.addEventListener('click', function()
-{
-	a.buttonNames = null; 	a.message = 'One Button';	a.show();
-});
-win1.add(button1); /-> Avaliable in this context
- */
-
+Ti.API.info( 1 );
 
 // Temos que fazer uma classe Task com uma interface pré-estabelecida pra usarmos
-// Premio pior nome do mundo de função
 function time_diff_in_percent_from_now(d1, d2) {
 	Ti.API.info( "time diff debug" );
-	Ti.API.info( "d1 "+d1);
+	Ti.API.info( "d1 "+d1); 
 	Ti.API.info( "d2 "+d2 );
 	
 	
 	//Time in ms
-	var period = d2-d1 
+	var period = d2-d1;
 	Ti.API.info( "period  "+period );
 	
 	// se (elapsed < 0 ) -- não começou ainda
@@ -57,23 +39,35 @@ function time_diff_in_percent_from_now(d1, d2) {
 }
 
 
-// func responsável por criar a 'linha' da TASK
+
+
+Ti.API.info( 2 );
+
+
+
+// func responsável por criar a row da TASK
 function taskViewBuilder( task ){
-	// space void between Blocks.
-	//var top_gap = 5
 	
-	var taskView = Ti.UI.createView({ className : 'taskViewBox' });
-	var taskLabel = Ti.UI.createLabel({ className : 'taskViewBoxLabel', text:task.title});
-//
-//Ti.API.info('Next info is: taskLabel.height');
-//Ti.API.info( parseFloat(taskLabel.height)+"" );
-//Ti.API.info(3+taskLabel.height+top_gap)
-//
+	var row = Ti.UI.createTableViewRow({
+		height:'auto',
+		className:"row"
+	});
+	
+	var taskView = Ti.UI.createView({
+		className : 'taskViewBox' 
+	});
+	
+	var taskLabel = Ti.UI.createLabel({
+		className : 'taskViewBoxLabel',
+		text:task.title
+	});
+	
+	taskView.add( taskLabel );
+	
 	
 	var lazyBar = Ti.UI.createView({
 		backgroundColor:'orange',
 		className: 'lazyBar',
-		//width: time_diff_in_percent_from_now(task.begin, task.end)+'%'
 	});
 	
 	if( task.state() == 'before'){
@@ -81,53 +75,95 @@ function taskViewBuilder( task ){
 		
 		
 	} else if( task.state() == 'current' ){
-		lazyBar.backgroundColor = 'orange'
-		lazyBar.width = time_diff_in_percent_from_now(task.begin, task.end)+'%'
+		lazyBar.backgroundColor = 'orange';
+		lazyBar.width = time_diff_in_percent_from_now(task.begin, task.end)+'%';
 		
 		
 	} else if( task.state() == 'expired' ){
-		lazyBar.backgroundColor = 'gray'
-		lazyBar.width = '100%'
+		lazyBar.backgroundColor = 'gray';
+		lazyBar.width = '100%';
 	}
 	
+	//taskView.add( lazyBar   );
+	row.add( taskView );
 	
 	
-	taskView.add(taskLabel);
-	taskView.add(lazyBar);
+	row.add( lazyBar );
 	
-	return taskView;
+	return row;
 }
 
+
+
+Ti.API.info( 3 );
+
+
+
+
+var tv = Ti.UI.createTableView({minRowHeight:50});
+
+var data = [];
 
 
 /**
  * from vertical_layout_basic.js
  */
-// Do i need this? win1.layout = 'vertical';
+
+
 
 // HEADER
-var header = Ti.UI.createView({height:30,borderWidth:1,borderColor:'#999',backgroundColor:'white'});
-var headerLabel = Ti.UI.createLabel({color:'#777', top:10,textAlign:'center', height:'auto', text:'All Current Tasks'});
-header.add(headerLabel);
 
-//win1.add(header);
-win.add(header);
+var header_row = Ti.UI.createTableViewRow({
+	height:'auto',
+	className:"row"
+});
+
+var header = Ti.UI.createView({
+	height:30,
+	borderWidth:1,
+	borderColor:'#999',
+	backgroundColor:'white'
+});
+
+var headerLabel = Ti.UI.createLabel({
+	color:'#777', 
+	top:10,
+	textAlign:'center', 
+	height:'auto', 
+	text:'All Current Tasks'
+});
+
+header.add( headerLabel );
+
+header_row.add( header );
+
+data.push( header_row );
+
+
+
+
+
+
+
+Ti.API.info( 4 );
 
 // BODY
-var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'#fff'});
+//var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'#fff'});
 
-//TODO loop here, all tasks.
+// TODO loop here, all tasks.
 	
 	var task = {
 		// FUCKING JS, months begin at 0 .. 11 AFF!
 		begin: new Date(2011, 3, 8, 15, 10, 10),
-		end: new Date(2011, 4, 14, 15, 10, 10),
+		end:   new Date(2011, 4, 14, 15, 10, 10),
 		title: "Ola Mundo Ola Mundo Ola Mundo Ola Mundo ", // Limitar a 40 char
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'current' }
 	};
-	body.add( taskViewBuilder(task) );
-	
+Ti.API.info( 5 );
+	//body.add( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+Ti.API.info( 6 );
 	
 	var task = {
 		// FUCKING JS, months begin at 0 .. 11 AFF!
@@ -137,7 +173,8 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'expired' }
 	};
-	body.add( taskViewBuilder(task) );
+	//body.add( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
 	
 	
 	var task = {
@@ -148,7 +185,8 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'current' }
 	};
-	body.add( taskViewBuilder(task) );
+	//body.add( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
 	
 	
 	var task = {
@@ -159,21 +197,29 @@ var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'before' }
 	};
-	body.add( taskViewBuilder(task) );
+	//body.add( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
 	
-	body.add( taskViewBuilder(task) );
-	
-//var bodyView2 = Ti.UI.createView({backgroundColor:'#ff0000', height:50, left:10, right:10, top:10});
-//var bodyView3 = Ti.UI.createView({backgroundColor:'orange', height:50, left:10, right:10, top:10});
+	//body.add( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
+	data.push( taskViewBuilder(task) );
 
-//win1.add(body);
-win.add(body);
+Ti.API.info( 7 );
 
+// Add rows to TableView 
+tv.setData(data);
 
+Ti.API.info( 8 );
 
-// FOOTER
-//var footer = Ti.UI.createView({height:50,borderWidth:1,borderColor:'#999',backgroundColor:'white'});
-//var footerLabel = Ti.UI.createLabel({color:'#777', textAlign:'center', height:'auto', text:'Footer'});
-//footer.add(footerLabel);
-//win1.add(footer);
+// add TableView to the Window
+win.add(tv);
 
+Ti.API.info( 9 );
+
+//win.add(body);

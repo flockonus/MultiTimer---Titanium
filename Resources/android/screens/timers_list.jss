@@ -1,16 +1,26 @@
 @import 'common.jss';
 
-#barBazFoo {
-	barColor:#336699;
+
+.row {
+	borderWidth: 0;
+	backgroundColor: '#FFFFFF';
+	borderColor: '#FFFFFF';
+	top: 5;
 }
 
-
 .taskViewBox {
-	backgroundColor: '#4DFFAA';   /* '#336699'; */
+	backgroundColor: '#4DFFAA';
 	height:50;
 	left:0;
 	right:0;
-	top: 5;
+	width: '100%';
+}
+
+.taskViewBoxLabel {
+	color:'#222';
+	top:3;
+	textAlign:'left';
+	height: 20;
 }
 
 .lazyBar {
@@ -20,9 +30,13 @@
 	width: 0;
 }
 
-.taskViewBoxLabel {
-	color:'#222';
-	top:3;
-	textAlign:'left';
-	height:30;
-}
+
+
+
+
+
+
+
+
+
+
