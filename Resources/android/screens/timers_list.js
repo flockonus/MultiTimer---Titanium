@@ -65,30 +65,45 @@ function taskViewBuilder( task ){
 	taskView.add( taskLabel );
 	
 	
+	var progressBar = Titanium.UI.createProgressBar({
+	    width:'100%',
+	    min:0,
+	    max:100,
+	    value:0,
+	    color:'#fff',
+	    //message:'',
+	    font:{ fontSize:14, fontWeight:'bold' },
+	    style:Titanium.UI.iPhone.ProgressBarStyle.PLAIN, // Não consigo alterar??????? https://developer.appcelerator.com/apidoc/mobile/1.0/Titanium.UI.iPhone.StatusBar
+	});
+	
+	/*
 	var lazyBar = Ti.UI.createView({
 		backgroundColor:'orange',
 		className: 'lazyBar',
 	});
+	*/
 	
 	if( task.state() == 'before'){
 		// barra invisivel :P lazyBar.backgroundColor = 'blue'
 		
 		
 	} else if( task.state() == 'current' ){
-		lazyBar.backgroundColor = 'orange';
-		lazyBar.width = time_diff_in_percent_from_now(task.begin, task.end)+'%';
+		//lazyBar.backgroundColor = 'orange';
+		//lazyBar.width = time_diff_in_percent_from_now(task.begin, task.end)+'%';
+		progressBar.value = time_diff_in_percent_from_now(task.begin, task.end);
 		
 		
 	} else if( task.state() == 'expired' ){
-		lazyBar.backgroundColor = 'gray';
-		lazyBar.width = '100%';
+		//lazyBar.backgroundColor = 'gray';
+		//lazyBar.width = '100%';
+		progressBar.value = 100;
 	}
 	
-	//taskView.add( lazyBar   );
 	row.add( taskView );
 	
 	
-	row.add( lazyBar );
+	//row.add( lazyBar );
+	row.add( progressBar );
 	
 	return row;
 }
@@ -151,20 +166,6 @@ Ti.API.info( 4 );
 //var body = Ti.UI.createView({height:'auto', layout:'vertical', backgroundColor:'#fff'});
 
 // TODO loop here, all tasks.
-	
-	var task = {
-		// FUCKING JS, months begin at 0 .. 11 AFF!
-		begin: new Date(2011, 3, 8, 15, 10, 10),
-		end:   new Date(2011, 4, 14, 15, 10, 10),
-		title: "Ola Mundo Ola Mundo Ola Mundo Ola Mundo ", // Limitar a 40 char
-		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
-		state: function(){ return 'current' }
-	};
-Ti.API.info( 5 );
-	//body.add( taskViewBuilder(task) );
-	data.push( taskViewBuilder(task) );
-Ti.API.info( 6 );
-	
 	var task = {
 		// FUCKING JS, months begin at 0 .. 11 AFF!
 		begin: new Date(2011, 3, 2, 15, 05, 10),
@@ -173,34 +174,38 @@ Ti.API.info( 6 );
 		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'expired' }
 	};
-	//body.add( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
+Ti.API.info( 5 );
 	
 	
 	var task = {
-		// FUCKING JS, months begin at 0 .. 11 AFF!
 		begin: new Date(2011, 3, 10, 15, 10, 10),
 		end:   new Date(),
-		title: "Algo muito prox de terminar!", // Limitar a 40 char
-		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
+		title: "Algo MUITO prox de terminar!", // Limitar a 40 char
 		state: function(){ return 'current' }
 	};
-	//body.add( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
+Ti.API.info( 6 );
 	
 	
 	var task = {
-		// FUCKING JS, months begin at 0 .. 11 AFF!
+		begin: new Date(2011, 3, 8, 15, 10, 10),
+		end:   new Date(2011, 4, 14, 15, 10, 10),
+		title: "Ola Mundo Ola Mundo Ola Mundo Ola Mundo ", // Limitar a 40 char
+		state: function(){ return 'current' }
+	};
+	data.push( taskViewBuilder(task) );
+Ti.API.info( 7 );
+	
+	
+	var task = {
 		begin: new Date(2011, 8, 14, 15, 10, 10),
 		end:   new Date(2011, 8, 15, 15, 10, 10),
 		title: "Algo futuro", // Limitar a 40 char
-		// este é um mock de função, é esperado que retorne: 'before' | 'current' | 'expired' dependendo da tituação relativa a new Date().
 		state: function(){ return 'before' }
 	};
-	//body.add( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
 	
-	//body.add( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
@@ -210,7 +215,6 @@ Ti.API.info( 6 );
 	data.push( taskViewBuilder(task) );
 	data.push( taskViewBuilder(task) );
 
-Ti.API.info( 7 );
 
 // Add rows to TableView 
 tv.setData(data);
